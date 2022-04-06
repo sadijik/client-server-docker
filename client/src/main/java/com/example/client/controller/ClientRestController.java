@@ -2,13 +2,9 @@ package com.example.client.controller;
 
 
 import com.example.client.entity.Server;
-import com.example.client.properties.ClientConfigPropoerties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -18,8 +14,8 @@ import java.util.Collections;
 @RestController
 @RequestMapping("/client")
 public class ClientRestController {
-@Value("${client.url}")
-private String url;
+	@Value("${client.url}")
+	private String url;
 
 
 	private final RestTemplate restTemplate;
@@ -31,8 +27,8 @@ private String url;
 	}
 
 	@GetMapping()
-	public String greeting() {
-		return "серваер On";
+	public ResponseEntity<String> greeting() {
+		return ResponseEntity.ok("серваер On");
 	}
 
 	@PostMapping("/add_server")
