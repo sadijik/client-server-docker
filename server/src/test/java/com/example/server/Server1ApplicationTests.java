@@ -10,7 +10,10 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import java.time.LocalDateTime;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -36,16 +39,19 @@ class Server1ApplicationTests {
 
 	@Test
 	public void addClientOnServerTest() throws Exception {
+		//given
 		Server server = new Server();
 		server.setText("проверка");
 		server.setId(1L);
 
-
-		mvc.perform(MockMvcRequestBuilders.post("/server/add")
+        //when
+		ResultActions result = mvc.perform(MockMvcRequestBuilders.post("/server/add")
 						.content(objectMapper.writeValueAsString(server))
 						.contentType(MediaType.APPLICATION_JSON))
-				.andDo(print())
-				.andExpect(status().isOk())
+				.andDo(print());
+
+		//then
+				result.andExpect(status().isOk())
 				.andExpect(jsonPath("$.id").value(1L))
 				.andExpect(jsonPath("$.text").value("проверка"));
 
@@ -53,17 +59,27 @@ class Server1ApplicationTests {
 
 	@Test
 	public void allTest() throws Exception {
+		//given
 		Server server = new Server();
 		server.setText("проверка2");
-		server.setId(1L);
+		server.setId(2L);
 
+		//when
 		repository.save(server);
 
-		mvc.perform(MockMvcRequestBuilders.get("/server/all"))
-				.andDo(print())
-				.andExpect(status().isOk())
+		ResultActions result = mvc.perform(MockMvcRequestBuilders.get("/server/all"))
+				.andDo(print());
+
+
+
+		//then
+		result.andExpect(status().isOk())
 				.andExpect(jsonPath("$[0].id").value(server.getId()))
 				.andExpect(jsonPath("$[0].text").value("проверка2"));
+
+
+
+
 
 
 	}
