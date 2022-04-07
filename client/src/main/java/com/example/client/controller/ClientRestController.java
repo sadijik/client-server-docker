@@ -1,7 +1,7 @@
 package com.example.client.controller;
 
 
-import com.example.client.entity.Server;
+import com.example.client.entity.LogingServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -32,13 +32,13 @@ public class ClientRestController {
 	}
 
 	@PostMapping("/add_server")
-	public Server addServer(@RequestBody Server server) {
+	public LogingServer addServer(@RequestBody LogingServer server) {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-		HttpEntity<Server> entity = new HttpEntity<>(server, headers);
+		HttpEntity<LogingServer> entity = new HttpEntity<>(server, headers);
 
 
-		return restTemplate.exchange(url, HttpMethod.POST, entity, Server.class).getBody();
+		return restTemplate.exchange(url, HttpMethod.POST, entity, LogingServer.class).getBody();
 
 
 	}
