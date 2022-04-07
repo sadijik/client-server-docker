@@ -13,8 +13,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.time.LocalDateTime;
-
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -44,14 +42,14 @@ class Server1ApplicationTests {
 		server.setText("проверка");
 		server.setId(1L);
 
-        //when
+		//when
 		ResultActions result = mvc.perform(MockMvcRequestBuilders.post("/server/add")
 						.content(objectMapper.writeValueAsString(server))
 						.contentType(MediaType.APPLICATION_JSON))
 				.andDo(print());
 
 		//then
-				result.andExpect(status().isOk())
+		result.andExpect(status().isOk())
 				.andExpect(jsonPath("$.id").value(1L))
 				.andExpect(jsonPath("$.text").value("проверка"));
 
@@ -59,6 +57,7 @@ class Server1ApplicationTests {
 
 	@Test
 	public void allTest() throws Exception {
+
 		//given
 		Server server = new Server();
 		server.setText("проверка2");
@@ -70,16 +69,10 @@ class Server1ApplicationTests {
 		ResultActions result = mvc.perform(MockMvcRequestBuilders.get("/server/all"))
 				.andDo(print());
 
-
-
 		//then
 		result.andExpect(status().isOk())
 				.andExpect(jsonPath("$[0].id").value(server.getId()))
 				.andExpect(jsonPath("$[0].text").value("проверка2"));
-
-
-
-
 
 
 	}
