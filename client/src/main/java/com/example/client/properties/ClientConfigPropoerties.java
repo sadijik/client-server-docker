@@ -14,6 +14,4 @@ import org.springframework.context.annotation.PropertySource;
 @PropertySource("classpath:client.properties")
 public class ClientConfigPropoerties {
 	private String url;
-
-
 }

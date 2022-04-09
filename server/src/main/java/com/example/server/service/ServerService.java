@@ -1,6 +1,6 @@
 package com.example.server.service;
 
-import com.example.server.entity.Server;
+import com.example.server.entity.LogingRequest;
 import com.example.server.repo.ServerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,13 +18,13 @@ public class ServerService {
 		this.serverRepository = serverRepository;
 	}
 
-	public Server saveClient(Server server) {
-		return serverRepository.save(server);
+	public LogingRequest saveClient(LogingRequest logingRequest) {
+		return serverRepository.save(logingRequest);
 	}
 
-	public List<Server> findAll() {
-		Iterable<Server> all = serverRepository.findAll();
-		List<Server> list = new ArrayList<>();
+	public List<LogingRequest> findAll() {
+		Iterable<LogingRequest> all = serverRepository.findAll();
+		List<LogingRequest> list = new ArrayList<>();
 		all.forEach(list::add);
 		return list;
 	}
