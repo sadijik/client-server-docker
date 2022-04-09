@@ -12,7 +12,7 @@ import java.util.Collections;
 
 
 @RestController
-@RequestMapping("/client")
+@RequestMapping("/log")
 public class ClientRestController {
 	@Value("${client.url}")
 	private String url;
@@ -31,17 +31,12 @@ public class ClientRestController {
 		return ResponseEntity.ok("серваер On");
 	}
 
-	@PostMapping("/add_server")
-	public LogingRequest addServer(@RequestBody LogingRequest server) {
+	@PostMapping("/create")
+	public void addServer(@RequestBody LogingRequest logingRequest) {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-		HttpEntity<LogingRequest> entity = new HttpEntity<>(server, headers);
-
-
-		return restTemplate.exchange(url, HttpMethod.POST, entity, LogingRequest.class).getBody();
-
+		HttpEntity<LogingRequest> entity = new HttpEntity<>(logingRequest, headers);
+		ResponseEntity<LogingRequest> response = restTemplate.exchange(url, HttpMethod.POST, entity, LogingRequest.class);
 
 	}
-
-
 }

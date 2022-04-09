@@ -7,7 +7,7 @@
         <artifactId>client-server</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>server</artifactId>
+    <artifactId>logingRequest</artifactId>
 
     <name>server</name>
     <description>server</description>
@@ -70,7 +70,7 @@
 <!--                    <archive>-->
 <!--                        <manifest>-->
 <!--                            &lt;!&ndash; Jar file entry point &ndash;&gt;-->
-<!--                            <mainClass>com.example.server.ServerApplication</mainClass>-->
+<!--                            <mainClass>com.example.logingRequest.ServerApplication</mainClass>-->
 <!--                        </manifest>-->
 <!--                    </archive>-->
 <!--                </configuration>-->

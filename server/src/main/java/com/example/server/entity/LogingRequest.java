@@ -13,7 +13,7 @@ import javax.persistence.Id;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Server {
+public class LogingRequest {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

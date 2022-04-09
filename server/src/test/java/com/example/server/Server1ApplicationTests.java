@@ -1,6 +1,6 @@
 package com.example.server;
 
-import com.example.server.entity.Server;
+import com.example.server.entity.LogingRequest;
 import com.example.server.repo.ServerRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
@@ -38,13 +38,13 @@ class Server1ApplicationTests {
 	@Test
 	public void addClientOnServerTest() throws Exception {
 		//given
-		Server server = new Server();
-		server.setText("проверка");
-		server.setId(1L);
+		LogingRequest logingRequest = new LogingRequest();
+		logingRequest.setText("проверка");
+		logingRequest.setId(1L);
 
 		//when
 		ResultActions result = mvc.perform(MockMvcRequestBuilders.post("/server/add")
-						.content(objectMapper.writeValueAsString(server))
+						.content(objectMapper.writeValueAsString(logingRequest))
 						.contentType(MediaType.APPLICATION_JSON))
 				.andDo(print());
 
@@ -59,19 +59,19 @@ class Server1ApplicationTests {
 	public void allTest() throws Exception {
 
 		//given
-		Server server = new Server();
-		server.setText("проверка2");
-		server.setId(2L);
+		LogingRequest logingRequest = new LogingRequest();
+		logingRequest.setText("проверка2");
+		logingRequest.setId(2L);
 
 		//when
-		repository.save(server);
+		repository.save(logingRequest);
 
 		ResultActions result = mvc.perform(MockMvcRequestBuilders.get("/server/all"))
 				.andDo(print());
 
 		//then
 		result.andExpect(status().isOk())
-				.andExpect(jsonPath("$[0].id").value(server.getId()))
+				.andExpect(jsonPath("$[0].id").value(logingRequest.getId()))
 				.andExpect(jsonPath("$[0].text").value("проверка2"));
 
 
